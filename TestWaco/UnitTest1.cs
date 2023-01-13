@@ -64,7 +64,7 @@ namespace TestWaco
             Assert.AreEqual(message, "The CI doesn't Exist");
         }
        [TestMethod]
-       public void TestValidateGetTotalDebtReturnCorrectSum()// validar que la suma de mi deuda sea la correcta
+       public void TestValidateGetTotalDebtReturnCorrectSum()//correct debt
         {
             User myUser1 = new User(345431, "Pedro", "Vargas");
             Consumption consumption1 = new Consumption("01/2023", 10);//20

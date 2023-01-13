@@ -13,7 +13,6 @@ namespace WACO
         public string SurName { get; set; }
         List<Consumption> userConsumption;
         
-
         public User(int ci, string name, string surname)
         {
             CI = ci;
@@ -61,7 +60,7 @@ namespace WACO
                 totalPendingConsumption = pendingConsumption - paidConsumption;
                 total = totalPendingConsumption * 2;
             }
-
+            return total;
 
             //if(lastConsumptionPaid != null && lastConsumption != null)
             //{
@@ -77,7 +76,7 @@ namespace WACO
             //        GetDiferenceLiters(item.ConsumoInicial, lectureFirstPeriod);
             //    }
             //}
-            return total;
+
         }
         //public int GetDiferenceLiters(int lectureBefore, int lecturActual)
         //{

@@ -39,11 +39,8 @@ namespace WACO.UI
      
                         default:
                             break;
-                    }
+                    }    
 
-                    
-
-                    
                     if (userInput == 3)
                     {
                         waco.ShowUsers();
@@ -75,7 +72,7 @@ namespace WACO.UI
             {
                 var user = waco.FindUser(ci);
                 var total = user.TotalDebt();
-                Console.WriteLine("el total de monto es:{0} bs", total);
+                Console.WriteLine("The total amount is:{0} Bs", total);
                 Console.WriteLine("Are you sure to Paid the total debt? Y(Yes) N(No)");
                 var option = Console.ReadLine().ToUpper();
 
@@ -83,7 +80,7 @@ namespace WACO.UI
                 {
                     case "Y":
                         user.PaidTotalDebt();
-                        Console.WriteLine("el monto ha sido pagado");
+                        Console.WriteLine("The amount has been paid");
                         break;
                     case "N":
                         Console.WriteLine("Canceled by the user");
@@ -96,20 +93,16 @@ namespace WACO.UI
             else
             {
                 Console.WriteLine("No user found for CI {0}", ci);
-            }
-
-
-          
-
-
+            }       
         }
 
         private void ShowMainMenuOptions()
         {
+            Console.WriteLine("-------------WACO SYSTEM----------------");
             Console.WriteLine("----------Choose an Option---------------");
             Console.WriteLine("1: Register User");
             Console.WriteLine("2: Register Water Consumption");
-            Console.WriteLine("3: Payment total debt of a user.");
+            Console.WriteLine("3: Payment total debt of a user");
             //Console.WriteLine("3: Show Information");
             //Console.WriteLine("4: Show Comsumption Record");
             Console.WriteLine("0: Exit");
@@ -123,7 +116,7 @@ namespace WACO.UI
             int ci = ReadIntFromMenu();
             if (waco.ExistsUserWithCI(ci))
             {
-                Console.WriteLine("The CI ALREDY Exists");
+                Console.WriteLine("The CI already Exists");
             }
             else
             {
@@ -158,7 +151,7 @@ namespace WACO.UI
             if (waco.ExistsUserWithCI(ci))
             {
                 var find = waco.FindUser(ci);
-                Console.WriteLine("Enter Period by example:'01/2023'");
+                Console.WriteLine("Enter Period by example:'MM/YYYY'");
                 var period = Console.ReadLine();
                
                 if (find.VerifyLecture(period))
@@ -176,7 +169,6 @@ namespace WACO.UI
             }
 
         }
-
 
         private int ReadIntFromMenu()
         {
