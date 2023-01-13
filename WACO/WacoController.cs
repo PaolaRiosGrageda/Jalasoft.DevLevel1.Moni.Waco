@@ -12,16 +12,17 @@ namespace WACO
 
         public void Add(User myUser)
         {
-            _users.Add(myUser);
+            if (!ExistsUserWithCI(myUser.CI))
+            {
+                _users.Add(myUser);
+            }
         }
 
-        public int VerifyCI(int ci)
+        public bool ExistsUserWithCI(int ci)
         {
-            var query = _users.Where(item => item.CI == ci);
-
-            return query.Count();
-
+            return _users.Any(item => item.CI == ci);
         }
+
         public User FindUser(int ci)
         {
             //var query = _users.Where(item => item.CI == ci);

@@ -20,8 +20,7 @@ namespace TestWaco
             myList.Add(myUser2);
             myList.Add(myUser3);
 
-            var status = myList.VerifyCI(544323);
-            Assert.AreEqual(status, 1);
+            Assert.IsTrue(myList.ExistsUserWithCI(544323));
         }
 
         [TestMethod]
