@@ -12,6 +12,7 @@ namespace WACO
         public string Name { get; set; }
         public string SurName { get; set; }
         List<Consumption> userConsumption;
+        
 
         public User(int ci, string name, string surname)
         {
@@ -26,9 +27,8 @@ namespace WACO
             userConsumption.Add(Myconsumption);
         }
 
-        public int VerifyLecture(string period){
-            var query = userConsumption.Where(item => item.Period == period);
-            return query.Count();
+        public bool VerifyLecture(string period){
+            return userConsumption.Any(x => x.Period == period);
         }
 
         public void ShowConsumptionRecord(int ci)
@@ -38,6 +38,23 @@ namespace WACO
                 Console.WriteLine($"The consumption of the period { item.Period } is { item.Lecture }");
             }
         }
-
+        public double TotalDebt()
+        {
+            double total = 0;
+            foreach (var item in userConsumption)
+            {
+                if (item.State == false)
+                {
+                  int lectureFirstPeriod = userConsumption.First().Lecture;
+                    GetDiferenceLiters(item.ConsumoInicial, lectureFirstPeriod);
+                }
+            }
+            return total;
+        }
+        public int GetDiferenceLiters(int lectureBefore, int lecturActual)
+        {
+            int total = (lecturActual - lectureBefore)*2;
+            return total;
+        }
     }
 }

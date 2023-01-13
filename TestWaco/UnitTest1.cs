@@ -36,10 +36,8 @@ namespace TestWaco
             myUser1.Add_Consumption(consumption1);
             myUser1.Add_Consumption(consumption2);
             myUser1.Add_Consumption(consumption3);
-            myUser1.Add_Consumption(consumption4);
-
-            var status = myUser1.VerifyLecture("01/2023");
-            Assert.AreEqual(status, 3);
+            myUser1.Add_Consumption(consumption4);         
+            Assert.IsTrue(myUser1.VerifyLecture("01/2023"));
         }
 
         [TestMethod]
@@ -65,6 +63,7 @@ namespace TestWaco
             }
             Assert.AreEqual(message, "The CI doesn't Exist");
         }
-
+        [TestMethod]
+        //public void TestValidateUser()
     }
 }

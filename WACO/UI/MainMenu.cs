@@ -30,43 +30,22 @@ namespace WACO.UI
                             DisplayRegisterUser();
                             break;
                         case 2:
+                            DisplayRegisterLecture();
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter CI");
+                            int ci = ReadIntFromMenu();
 
                             break;
+                            
                         default:
                             break;
                     }
 
-                    if (userInput == 2)
-                    {
-                        Console.WriteLine("Enter CI");
-                        var ci = Int32.Parse(Console.ReadLine());
+                    
 
-                        var find = waco.FindUser(ci);
-
-                        if (find != null)
-                        {
-                            Console.WriteLine("Enter Period");
-                            var period = Console.ReadLine();
-                            Console.WriteLine("Enter Consumption");
-                            int consumption = Int32.Parse(Console.ReadLine());
-                            var verifyLecture = find.VerifyLecture(period);
-
-                            switch (verifyLecture)
-                            {
-                                case 0:
-                                    Consumption myConsumption = new Consumption(period, consumption);
-                                    find.Add_Consumption(myConsumption);
-                                    Console.WriteLine($"The consumption of the period {period} has been registered correctly");
-                                    break;
-
-                                case > 0:
-                                    Console.WriteLine("There is already reading in this period");
-                                    break;
-                            }
-                        }
-
-                    }
-                    else if (userInput == 3)
+                    
+                    if (userInput == 3)
                     {
                         waco.ShowUsers();
                     }
@@ -88,6 +67,8 @@ namespace WACO.UI
                 }
             }
         }
+
+        
 
         private void ShowMainMenuOptions()
         {
@@ -134,6 +115,32 @@ namespace WACO.UI
                         break;
                 }
             }
+        }
+
+        private void DisplayRegisterLecture()
+        {
+            Console.WriteLine("Enter CI");
+            int ci = ReadIntFromMenu();
+            if (waco.ExistsUserWithCI(ci))
+            {
+                var find = waco.FindUser(ci);
+                Console.WriteLine("Enter Period");
+                var period = Console.ReadLine();
+               
+                if (find.VerifyLecture(period))
+                {
+                    Console.WriteLine("There is already reading in this period");
+                }
+                else
+                {
+                    Console.WriteLine("Enter Consumption");
+                    int consumption = ReadIntFromMenu();
+                    Consumption myConsumption = new Consumption(period, consumption);
+                    find.Add_Consumption(myConsumption);
+                    Console.WriteLine($"The consumption of the period {period} has been registered correctly");
+                }
+            }
+
         }
 
 
