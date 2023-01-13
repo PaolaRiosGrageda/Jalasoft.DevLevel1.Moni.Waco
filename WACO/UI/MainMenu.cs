@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace WACO.UI
 {
@@ -33,11 +34,9 @@ namespace WACO.UI
                             DisplayRegisterLecture();
                             break;
                         case 3:
-                            Console.WriteLine("Enter CI");
-                            int ci = ReadIntFromMenu();
-
+                            GetTotalDebtsByUsers();
                             break;
-                            
+     
                         default:
                             break;
                     }
@@ -68,7 +67,42 @@ namespace WACO.UI
             }
         }
 
-        
+        private void GetTotalDebtsByUsers()
+        {
+            Console.WriteLine("Enter CI");
+            int ci = ReadIntFromMenu();
+            if (waco.ExistsUserWithCI(ci))
+            {
+                var user = waco.FindUser(ci);
+                var total = user.TotalDebt();
+                Console.WriteLine("el total de monto es:{0} bs", total);
+                Console.WriteLine("Are you sure to Paid the total debt? Y(Yes) N(No)");
+                var option = Console.ReadLine().ToUpper();
+
+                switch (option)
+                {
+                    case "Y":
+                        user.PaidTotalDebt();
+                        Console.WriteLine("el monto ha sido pagado");
+                        break;
+                    case "N":
+                        Console.WriteLine("Canceled by the user");
+                        break;
+                    default:
+                        Console.WriteLine($"Invalid option entered. '{option}'");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("No user found for CI {0}", ci);
+            }
+
+
+          
+
+
+        }
 
         private void ShowMainMenuOptions()
         {
@@ -124,7 +158,7 @@ namespace WACO.UI
             if (waco.ExistsUserWithCI(ci))
             {
                 var find = waco.FindUser(ci);
-                Console.WriteLine("Enter Period");
+                Console.WriteLine("Enter Period by example:'01/2023'");
                 var period = Console.ReadLine();
                
                 if (find.VerifyLecture(period))

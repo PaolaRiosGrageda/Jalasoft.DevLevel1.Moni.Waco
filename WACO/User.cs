@@ -41,20 +41,59 @@ namespace WACO
         public double TotalDebt()
         {
             double total = 0;
-            foreach (var item in userConsumption)
+
+            if (userConsumption.Count > 0)
             {
-                if (item.State == false)
+                int paidConsumption = 0;
+                int pendingConsumption = 0;
+                int totalPendingConsumption = 0;
+
+                var lastConsumptionPaid = userConsumption.FindLast(x => x.IsPaid);
+                var lastConsumption = userConsumption[userConsumption.Count() - 1];
+
+                if (lastConsumptionPaid != null)
                 {
-                  int lectureFirstPeriod = userConsumption.First().Lecture;
-                    GetDiferenceLiters(item.ConsumoInicial, lectureFirstPeriod);
+                    paidConsumption = lastConsumptionPaid.Lecture;
                 }
+
+                pendingConsumption = lastConsumption.Lecture;
+
+                totalPendingConsumption = pendingConsumption - paidConsumption;
+                total = totalPendingConsumption * 2;
             }
+
+
+            //if(lastConsumptionPaid != null && lastConsumption != null)
+            //{
+
+            //}
+
+            //foreach (var item in userConsumption)
+            //{
+
+            //    if (item.IsPaid == false)
+            //    {
+            //       int lectureFirstPeriod = userConsumption.First().Lecture;
+            //        GetDiferenceLiters(item.ConsumoInicial, lectureFirstPeriod);
+            //    }
+            //}
             return total;
         }
-        public int GetDiferenceLiters(int lectureBefore, int lecturActual)
+        //public int GetDiferenceLiters(int lectureBefore, int lecturActual)
+        //{
+        //    int total = (lecturActual - lectureBefore)*2;
+        //    return total;
+        //}
+
+        public void PaidTotalDebt()
         {
-            int total = (lecturActual - lectureBefore)*2;
-            return total;
+            foreach (var consumption in userConsumption)
+            {
+                if (!consumption.IsPaid)
+                {
+                    consumption.Pay();
+                }
+            }
         }
     }
 }

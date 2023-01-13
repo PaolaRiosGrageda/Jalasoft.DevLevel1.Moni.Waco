@@ -43,5 +43,22 @@ namespace WACO
                 Console.WriteLine(item.Name+"/"+item.SurName+"/"+item.CI);
             }
         }
+
+        //public List<Consumption> GetPendingConsumptionPerUser(int ci)
+        //{
+        //    List<Consumption> result= new List<Consumption>();
+        //    User user = FindUser(ci);
+        //    if(user != null)
+        //    {
+        //        user.
+        //    }
+
+        //    return result;
+        //}
+
+        //public int GetTotalDebtPerUser(int ci)
+        //{
+
+        //}
     }
 }

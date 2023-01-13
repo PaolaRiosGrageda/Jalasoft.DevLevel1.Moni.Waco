@@ -63,7 +63,36 @@ namespace TestWaco
             }
             Assert.AreEqual(message, "The CI doesn't Exist");
         }
+       [TestMethod]
+       public void TestValidateGetTotalDebtReturnCorrectSum()// validar que la suma de mi deuda sea la correcta
+        {
+            User myUser1 = new User(345431, "Pedro", "Vargas");
+            Consumption consumption1 = new Consumption("01/2023", 10);//20
+            Consumption consumption2 = new Consumption("02/2023", 20);//20
+            Consumption consumption3 = new Consumption("03/2023", 30);//20
+            Consumption consumption4 = new Consumption("04/2023", 50);//40 total 100
+
+            myUser1.Add_Consumption(consumption1);
+            myUser1.Add_Consumption(consumption2);
+            myUser1.Add_Consumption(consumption3);
+            myUser1.Add_Consumption(consumption4);
+            Assert.AreEqual(myUser1.TotalDebt(), 100);
+        }
         [TestMethod]
-        //public void TestValidateUser()
+        public void TestVerifyIfMyPaidIsUpdated()
+        {
+            User myUser1 = new User(345431, "Pedro", "Vargas");
+            Consumption consumption1 = new Consumption("01/2023", 10);//20
+            Consumption consumption2 = new Consumption("02/2023", 20);//20
+            Consumption consumption3 = new Consumption("03/2023", 30);//20
+            Consumption consumption4 = new Consumption("04/2023", 50);//40 total 100
+
+            myUser1.Add_Consumption(consumption1);
+            myUser1.Add_Consumption(consumption2);
+            myUser1.Add_Consumption(consumption3);
+            myUser1.Add_Consumption(consumption4);
+            myUser1.PaidTotalDebt();
+            Assert.AreEqual(myUser1.TotalDebt(),0);
+        }
     }
 }
